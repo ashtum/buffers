@@ -31,15 +31,29 @@ template<
 constexpr
 auto
 prefix_(
-    Span<T, Extent> const& b,
+    Span<T, Extent> const& bs,
     std::size_t n) ->
         typename std::enable_if<
-            detail::is_span<Span<T, Extent>>::value,
+            detail::is_span<Span<T, Extent>>::value
+                && ! detail::has_prefix<T>::value,
             Span<T, Extent>>::type
 {
-    if(n <= b.size())
-        return b.subspan(0, n);
-    return b;
+    if(n <= bs.size())
+        return bs.subspan(0, n);
+    return bs;
+}
+
+template<
+    class T,
+    class = std::enable_if<
+        detail::has_prefix<T>::value>::type>
+auto
+prefix_(
+    T const& bs,
+    std::size_t n) ->
+        decltype(bs.prefix(n))
+{
+    return bs.prefix(n);
 }
 
 } // buffers
