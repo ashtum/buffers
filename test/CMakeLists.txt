@@ -16,7 +16,6 @@ set(PFILES
     CMakeLists.txt
     Jamfile
     test_helpers.hpp
-    algorithm.cpp
     any_dynamic_buffer.cpp
     asio.cpp
     buffer_copy.cpp
@@ -28,6 +27,7 @@ set(PFILES
     const_buffer_span.cpp
     const_buffer_subspan.cpp
     flat_buffer.cpp
+    front.cpp
     make_buffer.cpp
     mutable_buffer.cpp
     mutable_buffer_pair.cpp

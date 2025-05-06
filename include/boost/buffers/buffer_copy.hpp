@@ -11,7 +11,6 @@
 #define BOOST_BUFFERS_BUFFER_COPY_HPP
 
 #include <boost/buffers/detail/config.hpp>
-#include <boost/buffers/algorithm.hpp>
 #include <boost/buffers/range.hpp>
 #include <boost/buffers/type_traits.hpp>
 #include <boost/assert.hpp>

@@ -10,6 +10,7 @@
 // Test that header file is self-contained.
 #include <boost/buffers/buffer_copy.hpp>
 
+#include <boost/buffers/const_buffer_pair.hpp>
 #include <boost/buffers/const_buffer_span.hpp>
 #include <boost/buffers/mutable_buffer_span.hpp>
 #include "test_helpers.hpp"
@@ -20,7 +21,45 @@ namespace buffers {
 struct buffer_copy_test
 {
     void
-    testBufferCopy()
+    testBufferCopy1()
+    {
+        std::string const s =
+            "Howdy partner";
+        auto const N = s.size();
+        for(std::size_t i = 0;
+            i < N; ++i)
+        {
+            for(std::size_t j = 0;
+                j < N; ++j)
+            {
+                for(std::size_t k = 0;
+                    k < N + 2; ++k)
+                {
+                    const_buffer_pair p0(
+                        const_buffer(
+                            s.data(), i),
+                        const_buffer(
+                            s.data() + i, N - i));
+                    char tmp[13];
+                    std::memset(tmp, 0, sizeof(tmp));
+                    mutable_buffer_pair p1(
+                        mutable_buffer(
+                            tmp, j),
+                        mutable_buffer(
+                            tmp + j, N - j));
+                    auto const n = buffer_copy(
+                        p1, p0, k);
+                    BOOST_TEST_LE(n, N);
+                    BOOST_TEST_EQ(
+                        s.substr(0, n),
+                        std::string(tmp, n));
+                }
+            }
+        }
+    }
+
+    void
+    testBufferCopy2()
     {
         auto const& pat = test_pattern();
 
@@ -100,7 +139,8 @@ struct buffer_copy_test
     void
     run()
     {
-        testBufferCopy();
+        testBufferCopy1();
+        testBufferCopy2();
         testEmptyBufferCopy();
     }
 };

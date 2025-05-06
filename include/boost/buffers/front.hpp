@@ -7,20 +7,11 @@
 // Official repository: https://github.com/cppalliance/buffers
 //
 
-#ifndef BOOST_BUFFERS_ALGORITHM_HPP
-#define BOOST_BUFFERS_ALGORITHM_HPP
+#ifndef BOOST_BUFFERS_FRONT_HPP
+#define BOOST_BUFFERS_FRONT_HPP
 
 #include <boost/buffers/detail/config.hpp>
-#include <boost/buffers/buffer_size.hpp>
-#include <boost/buffers/const_buffer.hpp>
-#include <boost/buffers/mutable_buffer.hpp>
-#include <boost/buffers/range.hpp>
-#include <boost/buffers/tag_invoke.hpp>
 #include <boost/buffers/type_traits.hpp>
-
-#include <boost/buffers/prefix.hpp>
-#include <boost/buffers/sans_prefix.hpp>
-#include <boost/buffers/suffix.hpp>
 
 namespace boost {
 namespace buffers {

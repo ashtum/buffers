@@ -11,6 +11,7 @@
 #include <boost/buffers/mutable_buffer_subspan.hpp>
 
 #include <boost/buffers/mutable_buffer_span.hpp>
+#include <boost/buffers/sans_suffix.hpp>
 #include "test_helpers.hpp"
 
 namespace boost {

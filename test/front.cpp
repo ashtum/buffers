@@ -8,68 +8,21 @@
 //
 
 // Test that header file is self-contained.
-#include <boost/buffers/algorithm.hpp>
-
-#include <boost/buffers/prefix.hpp>
-#include <boost/buffers/suffix.hpp>
+#include <boost/buffers/front.hpp>
 
 #include <boost/buffers/buffer_copy.hpp>
 #include <boost/buffers/buffer_size.hpp>
 #include <boost/buffers/const_buffer_pair.hpp>
-#include <boost/buffers/mutable_buffer_pair.hpp>
-#include <boost/static_assert.hpp>
-#include <string>
+#include <boost/buffers/prefix.hpp>
+#include <boost/buffers/sans_prefix.hpp>
+#include <boost/buffers/sans_suffix.hpp>
+
 #include "test_suite.hpp"
 
 namespace boost {
 namespace buffers {
 
-struct asio_mutable_buffer
-{
-    std::size_t size() const noexcept { return 0; }
-    void* data() const noexcept { return nullptr; }
-};
-
-struct asio_const_buffer
-{
-    std::size_t size() const noexcept { return 0; }
-    void const* data() const noexcept { return nullptr; }
-};
-
-struct not_a_buffer
-{
-    std::size_t size() const noexcept;
-    char* data() const noexcept;
-};
-
-struct asio_mutable_buffers
-{
-    asio_mutable_buffer const* begin() const noexcept;
-    asio_mutable_buffer const* end() const noexcept;
-};
-
-struct asio_const_buffers
-{
-    asio_const_buffer const* begin() const noexcept;
-    asio_const_buffer const* end() const noexcept;
-};
-
-BOOST_STATIC_ASSERT(  is_const_buffer_sequence   <const_buffer>::value);
-BOOST_STATIC_ASSERT(  is_const_buffer_sequence   <mutable_buffer>::value);
-BOOST_STATIC_ASSERT(! is_mutable_buffer_sequence <const_buffer>::value);
-BOOST_STATIC_ASSERT(  is_mutable_buffer_sequence <mutable_buffer>::value);
-
-//BOOST_STATIC_ASSERT(  is_const_buffer_sequence   <asio_const_buffers>::value);
-//BOOST_STATIC_ASSERT(  is_const_buffer_sequence   <asio_mutable_buffers>::value);
-//BOOST_STATIC_ASSERT(  is_mutable_buffer_sequence <asio_mutable_buffers>::value);
-//BOOST_STATIC_ASSERT(! is_mutable_buffer_sequence <asio_const_buffers>::value);
-
-BOOST_STATIC_ASSERT(  is_const_buffer_sequence   <const_buffer_pair>::value);
-BOOST_STATIC_ASSERT(  is_const_buffer_sequence   <mutable_buffer_pair>::value);
-BOOST_STATIC_ASSERT(! is_mutable_buffer_sequence <const_buffer_pair>::value);
-BOOST_STATIC_ASSERT(  is_mutable_buffer_sequence <mutable_buffer_pair>::value);
-
-struct algorithm_test
+struct front_test
 {
     void
     testBufferSize()
@@ -202,8 +155,8 @@ struct algorithm_test
 };
 
 TEST_SUITE(
-    algorithm_test,
-    "boost.buffers.algorithm");
+    front_test,
+    "boost.buffers.front");
 
 } // buffers
 } // boost

@@ -19,10 +19,12 @@ namespace buffers {
 
 /** Return the last n bytes of a buffer sequence
 */
+/**@{*/
 template<class>
 void
 suffix(...) = delete;
 
+// Span-like types
 template<
     template<class, std::size_t> class Span,
     class T, std::size_t Extent>
@@ -41,9 +43,9 @@ suffix(
     return b;
 }
 
+// User defined types
 template<
-    class T,
-    class = std::enable_if<
+    class T, class = typename std::enable_if<
         detail::has_suffix<T>::value>::type>
 auto
 suffix(
@@ -53,6 +55,13 @@ suffix(
 {
     return bs.suffix(n);
 }
+/**@}*/
+
+/** Alias for the type of a suffix of a buffer sequence.
+*/
+template<class T>
+using suffix_type = decltype(suffix(
+    std::declval<T const&>(), std::size_t{1}));
 
 } // buffers
 } // boost

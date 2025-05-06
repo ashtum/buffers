@@ -19,9 +19,11 @@ namespace buffers {
 
 /** Return the first n bytes of a buffer sequence
 */
+/**@{*/
 template<class>
 void prefix(...) = delete;
 
+// span-like types
 template<
     template<class, std::size_t> class Span,
     class T, std::size_t Extent>
@@ -40,9 +42,9 @@ prefix(
     return bs;
 }
 
+// user-defined types
 template<
-    class T,
-    class = std::enable_if<
+    class T, class = typename std::enable_if<
         detail::has_prefix<T>::value>::type>
 auto
 prefix(
@@ -52,6 +54,13 @@ prefix(
 {
     return bs.prefix(n);
 }
+/**@}*/
+
+/** Alias for the type of a prefix of a buffer sequence.
+*/
+template<class T>
+using prefix_type = decltype(prefix(
+    std::declval<T const&>(), std::size_t{1}));
 
 } // buffers
 } // boost
