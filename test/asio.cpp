@@ -7,12 +7,40 @@
 // Official repository: https://github.com/CPPAlliance/buffers
 //
 
+#include <boost/buffers/const_buffer.hpp>
+#include <boost/buffers/mutable_buffer.hpp>
+
 #include <boost/asio/buffer.hpp>
+#include <boost/static_assert.hpp>
+
+#include <type_traits>
 
 #include "test_helpers.hpp"
 
 namespace boost {
 namespace buffers {
+
+// asio buffers constructing from ours
+
+BOOST_STATIC_ASSERT(
+    std::is_constructible<
+        asio::const_buffer,
+        const_buffer>::value);
+
+BOOST_STATIC_ASSERT(
+    std::is_constructible<
+        asio::const_buffer,
+        mutable_buffer>::value);
+
+BOOST_STATIC_ASSERT(
+    std::is_constructible<
+        asio::mutable_buffer,
+        mutable_buffer>::value);
+
+BOOST_STATIC_ASSERT(
+    ! std::is_constructible<
+        asio::mutable_buffer,
+        const_buffer>::value);
 
 struct asio_test
 {
