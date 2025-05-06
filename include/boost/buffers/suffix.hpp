@@ -12,7 +12,8 @@
 
 #include <boost/buffers/detail/config.hpp>
 #include <boost/buffers/tag_invoke.hpp>
-#include <boost/buffers/detail/type_traits.hpp>
+#include <boost/buffers/detail/is_span.hpp>
+#include <type_traits>
 
 namespace boost {
 namespace buffers {

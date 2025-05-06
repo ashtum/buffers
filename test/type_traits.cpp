@@ -10,7 +10,7 @@
 // Test that header file is self-contained.
 #include <boost/buffers/type_traits.hpp>
 
-#include <boost/buffers/detail/type_traits.hpp>
+#include <boost/buffers/detail/is_span.hpp>
 #include <boost/static_assert.hpp>
 #include <boost/core/span.hpp>
 
