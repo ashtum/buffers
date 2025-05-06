@@ -28,7 +28,7 @@ operator*() const noexcept ->
         {
             if(i_ < s_->n_ - 1)
                 return b;
-            return prefix(b, s_->p1_);
+            return buffers::prefix(b, s_->p1_);
         }
         return sans_prefix(b, s_->p0_);
     }

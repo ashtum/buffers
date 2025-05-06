@@ -104,6 +104,13 @@ public:
         return p_ + n_;
     }
 
+    mutable_buffer_subspan
+    prefix(
+        std::size_t n) const noexcept
+    {
+        return prefix_impl(n);
+    }
+
     friend
     mutable_buffer_subspan
     tag_invoke(

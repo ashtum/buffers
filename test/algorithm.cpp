@@ -10,6 +10,9 @@
 // Test that header file is self-contained.
 #include <boost/buffers/algorithm.hpp>
 
+#include <boost/buffers/prefix.hpp>
+#include <boost/buffers/suffix.hpp>
+
 #include <boost/buffers/buffer_copy.hpp>
 #include <boost/buffers/buffer_size.hpp>
 #include <boost/buffers/const_buffer_pair.hpp>
