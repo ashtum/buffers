@@ -12,6 +12,7 @@
 
 #include <boost/buffers/detail/config.hpp>
 #include <boost/buffers/mutable_buffer.hpp>
+#include <boost/core/span.hpp>
 
 namespace boost {
 namespace buffers {

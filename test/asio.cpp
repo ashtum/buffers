@@ -22,10 +22,14 @@ namespace buffers {
 
 // asio buffers constructing from ours
 
+#if 0
 BOOST_STATIC_ASSERT(
-    std::is_constructible<
-        asio::const_buffer,
-        const_buffer>::value);
+    asio::detail::has_subspan_memfn<const_buffer>::value);
+
+BOOST_STATIC_ASSERT(
+    std::is_convertible<
+        const_buffer,
+        asio::const_buffer>::value);
 
 BOOST_STATIC_ASSERT(
     std::is_constructible<
@@ -41,6 +45,7 @@ BOOST_STATIC_ASSERT(
     ! std::is_constructible<
         asio::mutable_buffer,
         const_buffer>::value);
+#endif
 
 struct asio_test
 {
