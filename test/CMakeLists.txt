@@ -18,6 +18,7 @@ set(PFILES
     test_helpers.hpp
     algorithm.cpp
     any_dynamic_buffer.cpp
+    asio.cpp
     buffer_copy.cpp
     buffer_size.cpp
     buffers.cpp
@@ -44,6 +45,7 @@ add_executable(boost_buffers_tests ${PFILES} ${EXTRAFILES})
 target_include_directories(boost_buffers_tests PRIVATE . ../../url/extra)
 target_link_libraries(
     boost_buffers_tests PRIVATE
+    Boost::asio
     boost_buffers
     )
 add_test(NAME boost_buffers_tests COMMAND boost_buffers_tests)
