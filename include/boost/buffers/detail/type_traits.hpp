@@ -18,18 +18,41 @@ namespace boost {
 namespace buffers {
 namespace detail {
 
-// Return true if T is a span-like type
+// Alias for true_type if T is a span-like type
 template<class T, class = void>
 struct is_span : std::false_type {};
 
 template<class T>
 struct is_span<T, void_t<
-    decltype(std::declval<T const&>().subspan(+0,+0))
+    decltype(std::declval<T const&>().subspan(
+        std::size_t(0), std::size_t(0)))
     > > : std::true_type
 {
 };
 
-// is bidirectional iterator
+// Alias for true_type if T has member function `prefix`
+template<class T, class = void>
+struct has_prefix : std::false_type {};
+
+template<class T>
+struct has_prefix<T, void_t<decltype(
+        std::declval<T const&>().prefix(std::size_t(0))
+    )> > : std::true_type
+{
+};
+
+// Alias for true_type if T has member function `suffix`
+template<class T, class = void>
+struct has_suffix : std::false_type {};
+
+template<class T>
+struct has_suffix<T, void_t<decltype(
+        std::declval<T const&>().suffix(std::size_t(0))
+    )> > : std::true_type
+{
+};
+
+// Alias for true_type if T is a BidirectionalIterator
 template<class T, class = void>
 struct is_bidirectional_iterator : std::false_type
 {
