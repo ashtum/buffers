@@ -10,7 +10,7 @@
 #ifndef BOOST_BUFFERS_HPP
 #define BOOST_BUFFERS_HPP
 
-#include <boost/buffers/buffer_copy.hpp>
+#include <boost/buffers/copy.hpp>
 #include <boost/buffers/buffer_size.hpp>
 #include <boost/buffers/circular_buffer.hpp>
 #include <boost/buffers/const_buffer.hpp>

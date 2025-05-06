@@ -133,9 +133,9 @@ struct mutable_buffer_subspan_test
                 auto b1 = sans_prefix(cs0, i);
                 tmp = std::string(pat.size(), ' ');
                 mutable_buffer dest(&tmp[0], tmp.size());
-                auto n = buffer_copy(dest, b0);
+                auto n = copy(dest, b0);
                 dest = sans_prefix(dest, n);
-                n += buffer_copy(dest, b1);
+                n += copy(dest, b1);
                 BOOST_TEST_EQ(n, pat.size());
                 BOOST_TEST_EQ(tmp, pat);
             }
@@ -143,7 +143,7 @@ struct mutable_buffer_subspan_test
             {
                 auto b = prefix(sans_prefix(cs0, i), j);
                 tmp.resize(pat.size());
-                tmp.resize(buffer_copy(
+                tmp.resize(copy(
                     mutable_buffer(
                         &tmp[0], tmp.size()), b));
                 if(i <= pat.size())
@@ -155,7 +155,7 @@ struct mutable_buffer_subspan_test
             {
                 auto b = suffix(sans_suffix(cs0, i), j);
                 tmp.resize(pat.size());
-                tmp.resize(buffer_copy(
+                tmp.resize(copy(
                     mutable_buffer(
                         &tmp[0], tmp.size()), b));
                 if(i <= pat.size())

@@ -10,7 +10,7 @@
 // Test that header file is self-contained.
 #include <boost/buffers/front.hpp>
 
-#include <boost/buffers/buffer_copy.hpp>
+#include <boost/buffers/copy.hpp>
 #include <boost/buffers/buffer_size.hpp>
 #include <boost/buffers/const_buffer_pair.hpp>
 #include <boost/buffers/prefix.hpp>
@@ -66,7 +66,7 @@ struct front_test
                             tmp, j),
                         mutable_buffer(
                             tmp + j, N - j));
-                    auto const n = buffer_copy(
+                    auto const n = copy(
                         p1, p0, k);
                     BOOST_TEST_LE(n, N);
                     BOOST_TEST_EQ(

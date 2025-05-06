@@ -8,7 +8,7 @@
 //
 
 // Test that header file is self-contained.
-#include <boost/buffers/buffer_copy.hpp>
+#include <boost/buffers/copy.hpp>
 
 #include <boost/buffers/const_buffer_pair.hpp>
 #include <boost/buffers/const_buffer_span.hpp>
@@ -47,7 +47,7 @@ struct buffer_copy_test
                             tmp, j),
                         mutable_buffer(
                             tmp + j, N - j));
-                    auto const n = buffer_copy(
+                    auto const n = copy(
                         p1, p0, k);
                     BOOST_TEST_LE(n, N);
                     BOOST_TEST_EQ(
@@ -79,7 +79,7 @@ struct buffer_copy_test
                     { &s[0], j },
                     { &s[j],
                         pat.size() - j } };
-                auto n = buffer_copy(
+                auto n = copy(
                     mutable_buffer_span(mb, 2),
                     const_buffer_span(cb, 2));
                 BOOST_TEST_EQ(n, pat.size());
@@ -101,7 +101,7 @@ struct buffer_copy_test
                         { &s[0], j },
                         { &s[j],
                             pat.size() - j } };
-                    auto n = buffer_copy(
+                    auto n = copy(
                         mutable_buffer_span(mb, 2),
                         const_buffer_span(cb, 2), k);
                     s.resize(n);
@@ -122,7 +122,7 @@ struct buffer_copy_test
             const_buffer source{ nullptr, 0 };
             mutable_buffer target{ &s[0], s.size() };
 
-            auto n = buffer_copy(target, source);
+            auto n = copy(target, source);
             BOOST_TEST_EQ(n, 0);
         }
 
@@ -131,7 +131,7 @@ struct buffer_copy_test
             const_buffer source{ &s[0], s.size() };
             mutable_buffer target{ nullptr, 0 };
 
-            auto n = buffer_copy(target, source);
+            auto n = copy(target, source);
             BOOST_TEST_EQ(n, 0);
         }
     }
@@ -147,7 +147,7 @@ struct buffer_copy_test
 
 TEST_SUITE(
     buffer_copy_test,
-    "boost.buffers.buffer_copy");
+    "boost.buffers.copy");
 
 } // buffers
 } // boost

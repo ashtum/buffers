@@ -18,7 +18,7 @@ set(PFILES
     test_helpers.hpp
     any_dynamic_buffer.cpp
     asio.cpp
-    buffer_copy.cpp
+    copy.cpp
     buffer_size.cpp
     buffers.cpp
     circular_buffer.cpp

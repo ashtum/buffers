@@ -7,8 +7,8 @@
 // Official repository: https://github.com/cppalliance/buffers
 //
 
-#ifndef BOOST_BUFFERS_BUFFER_COPY_HPP
-#define BOOST_BUFFERS_BUFFER_COPY_HPP
+#ifndef BOOST_BUFFERS_COPY_HPP
+#define BOOST_BUFFERS_COPY_HPP
 
 #include <boost/buffers/detail/config.hpp>
 #include <boost/buffers/range.hpp>
@@ -102,7 +102,7 @@ struct buffer_copy_impl
 
 /** Copy buffer contents
 */
-constexpr detail::buffer_copy_impl buffer_copy{};
+constexpr detail::buffer_copy_impl copy{};
 
 } // buffers
 } // boost
