@@ -87,24 +87,6 @@ public:
         return n_;
     }
 
-#if 0
-    /** Remove a prefix from the buffer.
-    */
-    const_buffer&
-    operator+=(std::size_t n) noexcept
-    {
-        if(n >= n_)
-        {
-            p_ = p_ + n_;
-            n_ = 0;
-            return *this;
-        }
-        p_ = p_ + n;
-        n_ -= n;
-        return *this;
-    }
-#endif
-
     friend
     const_buffer
     tag_invoke(

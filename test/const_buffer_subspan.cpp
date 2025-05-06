@@ -133,7 +133,7 @@ struct const_buffer_subspan_test
                 tmp = std::string(pat.size(), ' ');
                 mutable_buffer dest(&tmp[0], tmp.size());
                 auto n = buffer_copy(dest, b0);
-                dest += n;
+                dest = sans_prefix(dest, n);
                 n += buffer_copy(dest, b1);
                 BOOST_TEST_EQ(n, pat.size());
                 BOOST_TEST_EQ(tmp, pat);

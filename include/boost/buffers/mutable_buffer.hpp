@@ -94,6 +94,7 @@ public:
         return this + 1;
     }
 
+#if 0
     /** Remove a prefix from the buffer.
     */
     mutable_buffer&
@@ -131,6 +132,7 @@ public:
     {
         return b += n;
     }
+#endif
 
     friend
     mutable_buffer
