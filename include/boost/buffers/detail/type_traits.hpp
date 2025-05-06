@@ -18,6 +18,17 @@ namespace boost {
 namespace buffers {
 namespace detail {
 
+// Return true if T is a span-like type
+template<class T, class = void>
+struct is_span : std::false_type {};
+
+template<class T>
+struct is_span<T, void_t<
+    decltype(std::declval<T const&>().subspan(+0,+0))
+    > > : std::true_type
+{
+};
+
 // is bidirectional iterator
 template<class T, class = void>
 struct is_bidirectional_iterator : std::false_type

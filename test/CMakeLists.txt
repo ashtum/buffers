@@ -33,8 +33,10 @@ set(PFILES
     mutable_buffer_pair.cpp
     mutable_buffer_span.cpp
     mutable_buffer_subspan.cpp
+    prefix.cpp
     range.cpp
     string_buffer.cpp
+    suffix.cpp
     tag_invoke.cpp
     type_traits.cpp
     )
