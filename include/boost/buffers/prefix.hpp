@@ -13,7 +13,6 @@
 #include <boost/buffers/detail/config.hpp>
 #include <boost/buffers/tag_invoke.hpp>
 #include <boost/buffers/detail/type_traits.hpp>
-#include <type_traits>
 
 namespace boost {
 namespace buffers {
@@ -26,9 +25,6 @@ using prefix_type = decltype(
         std::declval<prefix_tag const&>(),
         std::declval<T const&>(),
         std::declval<std::size_t>()));
-
-//template<class T>
-//void prefix(...) = delete;
 
 // span-like types
 template<
@@ -52,13 +48,17 @@ tag_invoke(
 
 /** Return the first n bytes of a buffer sequence
 */
-template<class T>
-auto
-prefix(T const& bs, std::size_t n) ->
-    prefix_type<T>
+constexpr struct
 {
-    return tag_invoke(prefix_tag{}, bs, n);
-}
+    template<class T>
+    constexpr auto operator()(
+        T const& bs,
+        std::size_t n) const ->
+            prefix_type<T>
+    {
+        return tag_invoke(prefix_tag{}, bs, n);
+    }
+} const prefix{};
 
 } // buffers
 } // boost

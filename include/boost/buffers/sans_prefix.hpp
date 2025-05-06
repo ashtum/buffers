@@ -17,33 +17,20 @@
 namespace boost {
 namespace buffers {
 
-namespace detail {
-
-struct sans_prefix_impl
+constexpr struct
 {
-    template<class BufferSequence>
-    suffix_type<BufferSequence>
-    operator()(
-        BufferSequence const& b,
-        std::size_t n) const
+    template<class T>
+    constexpr auto operator()(
+        T const& bs,
+        std::size_t n) const ->
+            suffix_type<T>
     {
-        static_assert(
-            is_const_buffer_sequence<
-                BufferSequence>::value,
-            "Type requirements not met");
-
-        auto const n0 = size(b);
+        auto const n0 = size(bs);
         if(n < n0)
-            return suffix(b, n0 - n);
-        return suffix(b, 0);
+            return suffix(bs, n0 - n);
+        return suffix(bs, 0);
     }
-};
-
-} // detail
-
-/** Return a suffix of the buffer sequence.
-*/
-constexpr detail::sans_prefix_impl sans_prefix{};
+} const sans_prefix{};
 
 } // buffers
 } // boost

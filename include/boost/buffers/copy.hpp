@@ -12,6 +12,7 @@
 
 #include <boost/buffers/detail/config.hpp>
 #include <boost/buffers/range.hpp>
+#include <boost/buffers/sans_prefix.hpp>
 #include <boost/buffers/type_traits.hpp>
 #include <boost/assert.hpp>
 #include <cstring>

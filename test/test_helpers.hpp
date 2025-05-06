@@ -10,10 +10,10 @@
 #ifndef BOOST_BUFFERS_TEST_HELPERS_HPP
 #define BOOST_BUFFERS_TEST_HELPERS_HPP
 
-#include <boost/buffers/algorithm.hpp>
 #include <boost/buffers/copy.hpp>
 #include <boost/buffers/size.hpp>
 #include <boost/buffers/make_buffer.hpp>
+#include <boost/buffers/prefix.hpp>
 #include <boost/buffers/range.hpp>
 #include <string>
 #include "test_suite.hpp"

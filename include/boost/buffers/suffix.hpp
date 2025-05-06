@@ -11,57 +11,55 @@
 #define BOOST_BUFFERS_SUFFIX_HPP
 
 #include <boost/buffers/detail/config.hpp>
+#include <boost/buffers/tag_invoke.hpp>
 #include <boost/buffers/detail/type_traits.hpp>
-#include <type_traits>
 
 namespace boost {
 namespace buffers {
 
-/** Return the last n bytes of a buffer sequence
+/** Alias for the type of a suffix of a buffer sequence.
 */
-/**@{*/
-template<class>
-void
-suffix(...) = delete;
+template<class T>
+using suffix_type = decltype(
+    tag_invoke(
+        std::declval<suffix_tag const&>(),
+        std::declval<T const&>(),
+        std::declval<std::size_t>()));
 
-// Span-like types
+// span-like types
 template<
     template<class, std::size_t> class Span,
     class T, std::size_t Extent>
 constexpr
 auto
-suffix(
-    Span<T, Extent> const& b,
+tag_invoke(
+    suffix_tag const&,
+    Span<T, Extent> const& bs,
     std::size_t n) ->
         typename std::enable_if<
-            detail::is_span<Span<T, Extent>>::value
-                && ! detail::has_suffix<T>::value,
-            Span<T, Extent> >::type
+            detail::is_span<Span<T, Extent>>::value,
+            Span<T, Extent>
+        >::type
 {
-    if(n < b.size())
-        return b.subspan(b.size() - n);
-    return b;
+    if(n < bs.size())
+        return bs.subspan(bs.size() - n);
+    return bs;
 }
 
-// User defined types
-template<
-    class T, class = typename std::enable_if<
-        detail::has_suffix<T>::value>::type>
-auto
-suffix(
-    T const& bs,
-    std::size_t n) ->
-        decltype(bs.suffix(n))
-{
-    return bs.suffix(n);
-}
-/**@}*/
-
-/** Alias for the type of a suffix of a buffer sequence.
+/** Return the last n bytes of a buffer sequence
 */
-template<class T>
-using suffix_type = decltype(suffix(
-    std::declval<T const&>(), std::size_t{1}));
+constexpr
+struct
+{
+    template<class T>
+    constexpr auto operator()(
+        T const& bs,
+        std::size_t n) const ->
+            suffix_type<T>
+    {
+        return tag_invoke(suffix_tag{}, bs, n);
+    }
+} const suffix{};
 
 } // buffers
 } // boost

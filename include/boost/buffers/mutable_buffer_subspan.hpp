@@ -98,11 +98,14 @@ public:
         return s.prefix_impl(n);
     }
 
+    friend
     mutable_buffer_subspan
-    suffix(
-        std::size_t n) const noexcept
+    tag_invoke(
+        suffix_tag const&,
+        mutable_buffer_subspan const& s,
+        std::size_t n) noexcept
     {
-        return suffix_impl(n);
+        return s.suffix_impl(n);
     }
 
 private:

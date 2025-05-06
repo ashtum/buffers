@@ -8,7 +8,7 @@
 //
 
 #include <boost/buffers/const_buffer_pair.hpp>
-#include <boost/buffers/algorithm.hpp>
+#include <boost/buffers/sans_prefix.hpp>
 
 namespace boost {
 namespace buffers {

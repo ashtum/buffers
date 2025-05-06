@@ -8,7 +8,8 @@
 //
 
 #include <boost/buffers/const_buffer_subspan.hpp>
-#include <boost/buffers/algorithm.hpp>
+#include <boost/buffers/prefix.hpp>
+#include <boost/buffers/sans_prefix.hpp>
 #include <boost/assert.hpp>
 
 namespace boost {

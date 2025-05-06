@@ -106,14 +106,18 @@ public:
         return b;
     }
 
+    friend
     mutable_buffer
-    suffix(std::size_t n) const noexcept
+    tag_invoke(
+        suffix_tag const&,
+        mutable_buffer const& b,
+        std::size_t n) noexcept
     {
-        if(n < n_)
-            return { p_ + (n_ - n), n };
-        return *this;
-    }
-};
+        auto const n0 = b.size();
+        if(n < n0)
+            return { b.p_ + (n0 - n), n };
+        return b;
+    }};
 
 } // buffers
 } // boost

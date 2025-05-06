@@ -104,11 +104,14 @@ public:
         return b.prefix_impl(n);
     }
 
+    friend
     const_buffer_pair
-    suffix(
-        std::size_t n) const noexcept
+    tag_invoke(
+        suffix_tag const&,
+        const_buffer_pair const& b,
+        std::size_t n) noexcept
     {
-        return suffix_impl(n);
+        return b.suffix_impl(n);
     }
 
 private:
