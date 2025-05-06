@@ -13,6 +13,7 @@
 #include <boost/buffers/detail/config.hpp>
 #include <boost/buffers/const_buffer.hpp>
 #include <boost/buffers/const_buffer_subspan.hpp>
+#include <boost/buffers/tag_invoke.hpp>
 #include <boost/buffers/type_traits.hpp>
 
 namespace boost {
@@ -103,11 +104,14 @@ public:
         return p_ + n_;
     }
 
+    friend
     const_buffer_subspan
-    prefix(
-        std::size_t n) const noexcept
+    tag_invoke(
+        prefix_tag const&,
+        const_buffer_span const& s,
+        std::size_t n) noexcept
     {
-        return prefix_impl(n);
+        return s.prefix_impl(n);
     }
 
     const_buffer_subspan

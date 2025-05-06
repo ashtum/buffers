@@ -94,11 +94,14 @@ public:
         return b_ + 2;
     }
 
+    friend
     const_buffer_pair
-    prefix(
-        std::size_t n) const noexcept
+    tag_invoke(
+        prefix_tag const&,
+        const_buffer_pair const& b,
+        std::size_t n) noexcept
     {
-        return prefix_impl(n);
+        return b.prefix_impl(n);
     }
 
     const_buffer_pair

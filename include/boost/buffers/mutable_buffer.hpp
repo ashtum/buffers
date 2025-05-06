@@ -94,12 +94,16 @@ public:
         return this + 1;
     }
 
+    friend
     mutable_buffer
-    prefix(std::size_t n) const noexcept
+    tag_invoke(
+        prefix_tag const&,
+        mutable_buffer const& b,
+        std::size_t n) noexcept
     {
-        if(n < size())
-            return { data(), n };
-        return *this;
+        if(n < b.size())
+            return { b.data(), n };
+        return b;
     }
 
     mutable_buffer

@@ -75,11 +75,14 @@ public:
         return b_ + 2;
     }
 
+    friend
     mutable_buffer_pair
-    prefix(
-        std::size_t n) const noexcept
+    tag_invoke(
+        prefix_tag const&,
+        mutable_buffer_pair const& b,
+        std::size_t n) noexcept
     {
-        return prefix_impl(n);
+        return b.prefix_impl(n);
     }
 
     mutable_buffer_pair

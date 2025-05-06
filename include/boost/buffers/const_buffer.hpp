@@ -12,6 +12,7 @@
 
 #include <boost/buffers/detail/config.hpp>
 #include <boost/buffers/mutable_buffer.hpp>
+#include <boost/buffers/tag_invoke.hpp>
 #include <boost/core/span.hpp>
 
 namespace boost {
@@ -87,12 +88,16 @@ public:
         return n_;
     }
 
+    friend
     const_buffer
-    prefix(std::size_t n) const noexcept
+    tag_invoke(
+        prefix_tag const&,
+        const_buffer const& b,
+        std::size_t n) noexcept
     {
-        if(n < size())
-            return { data(), n };
-        return *this;
+        if(n < b.size())
+            return { b.data(), n };
+        return b;
     }
 
     const_buffer

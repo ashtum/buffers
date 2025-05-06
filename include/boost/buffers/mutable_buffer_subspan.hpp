@@ -88,11 +88,14 @@ public:
     const_iterator
     end() const noexcept;
 
+    friend
     mutable_buffer_subspan
-    prefix(
-        std::size_t n) const noexcept
+    tag_invoke(
+        prefix_tag const&,
+        mutable_buffer_subspan const& s,
+        std::size_t n) noexcept
     {
-        return prefix_impl(n);
+        return s.prefix_impl(n);
     }
 
     mutable_buffer_subspan

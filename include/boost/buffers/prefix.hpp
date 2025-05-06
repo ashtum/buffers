@@ -11,17 +11,24 @@
 #define BOOST_BUFFERS_PREFIX_HPP
 
 #include <boost/buffers/detail/config.hpp>
+#include <boost/buffers/tag_invoke.hpp>
 #include <boost/buffers/detail/type_traits.hpp>
 #include <type_traits>
 
 namespace boost {
 namespace buffers {
 
-/** Return the first n bytes of a buffer sequence
+/** Alias for the type of a prefix of a buffer sequence.
 */
-/**@{*/
-template<class>
-void prefix(...) = delete;
+template<class T>
+using prefix_type = decltype(
+    tag_invoke(
+        std::declval<prefix_tag const&>(),
+        std::declval<T const&>(),
+        std::declval<std::size_t>()));
+
+//template<class T>
+//void prefix(...) = delete;
 
 // span-like types
 template<
@@ -29,38 +36,29 @@ template<
     class T, std::size_t Extent>
 constexpr
 auto
-prefix(
+tag_invoke(
+    prefix_tag const&,
     Span<T, Extent> const& bs,
     std::size_t n) ->
         typename std::enable_if<
-            detail::is_span<Span<T, Extent>>::value
-                && ! detail::has_prefix<T>::value,
-            Span<T, Extent> >::type
+            detail::is_span<Span<T, Extent>>::value,
+            Span<T, Extent>
+        >::type
 {
     if(n <= bs.size())
         return bs.subspan(0, n);
     return bs;
 }
 
-// user-defined types
-template<
-    class T, class = typename std::enable_if<
-        detail::has_prefix<T>::value>::type>
-auto
-prefix(
-    T const& bs,
-    std::size_t n) ->
-        decltype(bs.prefix(n))
-{
-    return bs.prefix(n);
-}
-/**@}*/
-
-/** Alias for the type of a prefix of a buffer sequence.
+/** Return the first n bytes of a buffer sequence
 */
 template<class T>
-using prefix_type = decltype(prefix(
-    std::declval<T const&>(), std::size_t{1}));
+auto
+prefix(T const& bs, std::size_t n) ->
+    prefix_type<T>
+{
+    return tag_invoke(prefix_tag{}, bs, n);
+}
 
 } // buffers
 } // boost
