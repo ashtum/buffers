@@ -87,6 +87,7 @@ public:
         return n_;
     }
 
+#if 0
     /** Remove a prefix from the buffer.
     */
     const_buffer&
@@ -102,28 +103,7 @@ public:
         n_ -= n;
         return *this;
     }
-
-    /** Return the buffer with a prefix removed.
-    */
-    friend
-    const_buffer
-    operator+(
-        const_buffer b,
-        std::size_t n) noexcept
-    {
-        return b += n;
-    }
-
-    /** Return the buffer with a prefix removed.
-    */
-    friend
-    const_buffer
-    operator+(
-        std::size_t n,
-        const_buffer b) noexcept
-    {
-        return b += n;
-    }
+#endif
 
     friend
     const_buffer

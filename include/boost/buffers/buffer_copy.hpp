@@ -11,6 +11,7 @@
 #define BOOST_BUFFERS_BUFFER_COPY_HPP
 
 #include <boost/buffers/detail/config.hpp>
+#include <boost/buffers/algorithm.hpp>
 #include <boost/buffers/range.hpp>
 #include <boost/buffers/type_traits.hpp>
 #include <boost/assert.hpp>
@@ -57,10 +58,8 @@ struct buffer_copy_impl
             it0 != end0 &&
             it1 != end1)
         {
-            const_buffer b0 =
-                const_buffer(*it0) + pos0;
-            mutable_buffer b1 =
-                mutable_buffer(*it1) + pos1;
+            auto b0 = sans_prefix(const_buffer(*it0), pos0);
+            auto b1 = sans_prefix(mutable_buffer(*it1), pos1);
             std::size_t const amount =
             [&]
             {
