@@ -26,9 +26,9 @@ struct suffix_test
         {
             char buf[32];
             span<char> s(buf);
-            BOOST_TEST(suffix_(s, 0).size() == 0);
-            BOOST_TEST(suffix_(s, 1).size() == 1);
-            BOOST_TEST(suffix_(s, 99).size() == 32);
+            BOOST_TEST(suffix(s, 0).size() == 0);
+            BOOST_TEST(suffix(s, 1).size() == 1);
+            BOOST_TEST(suffix(s, 99).size() == 32);
         }
     }
 };

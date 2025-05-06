@@ -33,7 +33,7 @@ prefix(
         typename std::enable_if<
             detail::is_span<Span<T, Extent>>::value
                 && ! detail::has_prefix<T>::value,
-            Span<T, Extent>>::type
+            Span<T, Extent> >::type
 {
     if(n <= bs.size())
         return bs.subspan(0, n);

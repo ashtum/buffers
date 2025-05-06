@@ -19,23 +19,10 @@
 #include <boost/buffers/type_traits.hpp>
 
 #include <boost/buffers/prefix.hpp>
+#include <boost/buffers/suffix.hpp>
 
 namespace boost {
 namespace buffers {
-
-template<class BufferSequence>
-void
-tag_invoke(
-    prefix_tag const&,
-    BufferSequence const&,
-    std::size_t) = delete;
-
-template<class BufferSequence>
-void
-tag_invoke(
-    suffix_tag const&,
-    BufferSequence const&,
-    std::size_t) = delete;
 
 /** Returns the type of a prefix of a buffer sequence.
 */
@@ -47,30 +34,9 @@ using prefix_type = decltype(
 */
 template<class BufferSequence>
 using suffix_type = decltype(
-    tag_invoke(
-        suffix_tag{},
-        std::declval<BufferSequence const&>(),
-        std::size_t{}));
+    std::declval<BufferSequence const&>().suffix(std::size_t{}));
 
 namespace detail {
-
-struct prefix_impl
-{
-    template<class BufferSequence>
-    prefix_type<BufferSequence>
-    operator()(
-        BufferSequence const& b,
-        std::size_t n) const
-    {
-        static_assert(
-            is_const_buffer_sequence<
-                BufferSequence>::value,
-            "Type requirements not met");
-
-        return tag_invoke(
-            prefix_tag{}, b, n);
-    }
-};
 
 struct sans_suffix_impl
 {
@@ -84,24 +50,6 @@ struct sans_suffix_impl
         if(n < n0)
             return prefix(b, n0 - n);
         return prefix(b, 0);
-    }
-};
-
-struct suffix_impl
-{
-    template<class BufferSequence>
-    suffix_type<BufferSequence>
-    operator()(
-        BufferSequence const& b,
-        std::size_t n) const
-    {
-        static_assert(
-            is_const_buffer_sequence<
-                BufferSequence>::value,
-            "Type requirements not met");
-
-        return tag_invoke(
-            suffix_tag{}, b, n);
     }
 };
 
@@ -120,10 +68,8 @@ struct sans_prefix_impl
 
         auto const n0 = buffer_size(b);
         if(n < n0)
-            return tag_invoke(
-                suffix_tag{}, b, n0 - n);
-        return tag_invoke(
-            suffix_tag{}, b, 0);
+            return suffix(b, n0 - n);
+        return suffix(b, 0);
     }
 };
 
@@ -168,16 +114,6 @@ struct front_impl
 };
 
 } // detail
-
-/** Return a prefix of the buffer sequence.
-*/
-#if 0
-constexpr detail::prefix_impl prefix{};
-#endif
-
-/** Return a suffix of the buffer sequence.
-*/
-constexpr detail::suffix_impl suffix{};
 
 /** Return a suffix of the buffer sequence.
 */

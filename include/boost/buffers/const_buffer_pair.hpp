@@ -101,24 +101,11 @@ public:
         return prefix_impl(n);
     }
 
-    friend
     const_buffer_pair
-    tag_invoke(
-        prefix_tag const&,
-        const_buffer_pair const& b,
-        std::size_t n) noexcept
+    suffix(
+        std::size_t n) const noexcept
     {
-        return b.prefix_impl(n);
-    }
-
-    friend
-    const_buffer_pair
-    tag_invoke(
-        suffix_tag const&,
-        const_buffer_pair const& b,
-        std::size_t n) noexcept
-    {
-        return b.suffix_impl(n);
+        return suffix_impl(n);
     }
 
 private:

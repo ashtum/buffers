@@ -102,16 +102,12 @@ public:
         return *this;
     }
 
-    friend
     mutable_buffer
-    tag_invoke(
-        suffix_tag const&,
-        mutable_buffer const& b,
-        std::size_t n) noexcept
+    suffix(std::size_t n) const noexcept
     {
-        if(n < b.size())
-            return { b.p_ + b.n_ - n, n };
-        return b;
+        if(n < n_)
+            return { p_ + (n_ - n), n };
+        return *this;
     }
 };
 

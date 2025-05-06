@@ -95,17 +95,12 @@ public:
         return *this;
     }
 
-    friend
     const_buffer
-    tag_invoke(
-        suffix_tag const&,
-        const_buffer const& b,
-        std::size_t n) noexcept
+    suffix(std::size_t n) const noexcept
     {
-        auto const n0 = b.size();
-        if(n < n0)
-            return { b.p_ + (n0 - n), n };
-        return b;
+        if(n < n_)
+            return { p_ + (n_ - n), n };
+        return *this;
     }
 };
 

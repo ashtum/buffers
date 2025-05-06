@@ -95,24 +95,11 @@ public:
         return prefix_impl(n);
     }
 
-    friend
     const_buffer_subspan
-    tag_invoke(
-        prefix_tag const&,
-        const_buffer_subspan const& s,
-        std::size_t n) noexcept
+    suffix(
+        std::size_t n) const noexcept
     {
-        return s.prefix_impl(n);
-    }
-
-    friend
-    const_buffer_subspan
-    tag_invoke(
-        suffix_tag const&,
-        const_buffer_subspan const& s,
-        std::size_t n) noexcept
-    {
-        return s.suffix_impl(n);
+        return suffix_impl(n);
     }
 
 private:
