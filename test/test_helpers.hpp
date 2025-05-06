@@ -12,7 +12,7 @@
 
 #include <boost/buffers/algorithm.hpp>
 #include <boost/buffers/copy.hpp>
-#include <boost/buffers/buffer_size.hpp>
+#include <boost/buffers/size.hpp>
 #include <boost/buffers/make_buffer.hpp>
 #include <boost/buffers/range.hpp>
 #include <string>
@@ -35,7 +35,7 @@ std::string
 test_to_string(Buffers const& bs)
 {
     std::string s(
-        buffer_size(bs), 0);
+        size(bs), 0);
     s.resize(copy(
         make_buffer(&s[0], s.size()),
         bs));

@@ -19,7 +19,7 @@ set(PFILES
     any_dynamic_buffer.cpp
     asio.cpp
     copy.cpp
-    buffer_size.cpp
+    size.cpp
     buffers.cpp
     circular_buffer.cpp
     const_buffer.cpp

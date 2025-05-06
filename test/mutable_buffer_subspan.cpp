@@ -31,18 +31,18 @@ struct mutable_buffer_subspan_test
         // mutable_buffer_subspan()
         {
             mutable_buffer_subspan bs;
-            BOOST_TEST_EQ(buffer_size(bs), 0);
+            BOOST_TEST_EQ(size(bs), 0);
         }
 
         // mutable_buffer_subspan(
         //  mutable_buffer const*, std::size_t)
         {
             mutable_buffer_subspan s(mb, 3);
-            BOOST_TEST_EQ(buffer_size(s), 15);
+            BOOST_TEST_EQ(size(s), 15);
         }
         {
             mutable_buffer_subspan s(mb, 0);
-            BOOST_TEST_EQ(buffer_size(s), 0);
+            BOOST_TEST_EQ(size(s), 0);
         }
 
         // mutable_buffer_subspan(
@@ -51,15 +51,15 @@ struct mutable_buffer_subspan_test
             mutable_buffer_span ms0(mb, 3);
             mutable_buffer_subspan ms1(ms0);
             BOOST_TEST_EQ(
-                buffer_size(ms0),
-                buffer_size(ms1));
+                size(ms0),
+                size(ms1));
         }
         {
             mutable_buffer_span ms0(mb, 0);
             mutable_buffer_subspan ms1(ms0);
             BOOST_TEST_EQ(
-                buffer_size(ms0),
-                buffer_size(ms1));
+                size(ms0),
+                size(ms1));
         }
 
         // mutable_buffer_subspan(
@@ -68,17 +68,17 @@ struct mutable_buffer_subspan_test
             mutable_buffer_subspan s0(mb, 3);
             mutable_buffer_subspan s1(s0);
             BOOST_TEST_EQ(
-                buffer_size(s1),
-                buffer_size(s0));
+                size(s1),
+                size(s0));
         }
 
         // operator=(
         //  mutable_buffer_subspan const&)
         {
             mutable_buffer_subspan s;
-            BOOST_TEST_EQ(buffer_size(s), 0);
+            BOOST_TEST_EQ(size(s), 0);
             s = mutable_buffer_subspan(mb, 3);
-            BOOST_TEST_EQ(buffer_size(s), 15);
+            BOOST_TEST_EQ(size(s), 15);
         }
     }
 

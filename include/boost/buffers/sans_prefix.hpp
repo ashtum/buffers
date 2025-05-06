@@ -11,7 +11,7 @@
 #define BOOST_BUFFERS_SANS_PREFIX_HPP
 
 #include <boost/buffers/detail/config.hpp>
-#include <boost/buffers/buffer_size.hpp>
+#include <boost/buffers/size.hpp>
 #include <boost/buffers/suffix.hpp>
 
 namespace boost {
@@ -32,7 +32,7 @@ struct sans_prefix_impl
                 BufferSequence>::value,
             "Type requirements not met");
 
-        auto const n0 = buffer_size(b);
+        auto const n0 = size(b);
         if(n < n0)
             return suffix(b, n0 - n);
         return suffix(b, 0);

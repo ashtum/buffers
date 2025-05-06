@@ -11,7 +11,7 @@
 #define BOOST_BUFFERS_SANS_SUFFIX_HPP
 
 #include <boost/buffers/detail/config.hpp>
-#include <boost/buffers/buffer_size.hpp>
+#include <boost/buffers/size.hpp>
 #include <boost/buffers/const_buffer.hpp>
 #include <boost/buffers/mutable_buffer.hpp>
 #include <boost/buffers/range.hpp>
@@ -34,7 +34,7 @@ struct sans_suffix_impl
         BufferSequence const& b,
         std::size_t n) const
     {
-        auto const n0 = buffer_size(b);
+        auto const n0 = size(b);
         if(n < n0)
             return prefix(b, n0 - n);
         return prefix(b, 0);

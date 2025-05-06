@@ -109,7 +109,7 @@ struct string_buffer_test
                 string_buffer b(&s);
                 auto dest = b.prepare(10);
                 BOOST_TEST_GE(s.capacity(),
-                    buffer_size(dest));
+                    size(dest));
             }
             {
                 s = std::string();
@@ -117,7 +117,7 @@ struct string_buffer_test
                 b.prepare(10);
                 auto dest = b.prepare(10);
                 BOOST_TEST_EQ(
-                    buffer_size(dest),
+                    size(dest),
                     10);
             }
         }
@@ -153,7 +153,7 @@ struct string_buffer_test
                     string_buffer b(&s);
                     b.consume(5);
                     BOOST_TEST_EQ(
-                        buffer_size(b.data()), 0);
+                        size(b.data()), 0);
                 }
                 BOOST_TEST(s.empty());
             }

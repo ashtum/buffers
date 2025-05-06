@@ -11,7 +11,7 @@
 #include <boost/buffers/front.hpp>
 
 #include <boost/buffers/copy.hpp>
-#include <boost/buffers/buffer_size.hpp>
+#include <boost/buffers/size.hpp>
 #include <boost/buffers/const_buffer_pair.hpp>
 #include <boost/buffers/prefix.hpp>
 #include <boost/buffers/sans_prefix.hpp>
@@ -34,7 +34,7 @@ struct front_test
                 const_buffer(a, sizeof(a)),
                 const_buffer(b, sizeof(b)));
             BOOST_TEST_EQ(
-                buffer_size(p),
+                size(p),
                 sizeof(a) + sizeof(b));
         }
     }

@@ -11,7 +11,7 @@
 #define BOOST_BUFFERS_ALGORITHM_HPP
 
 #include <boost/buffers/detail/config.hpp>
-#include <boost/buffers/buffer_size.hpp>
+#include <boost/buffers/size.hpp>
 #include <boost/buffers/const_buffer.hpp>
 #include <boost/buffers/mutable_buffer.hpp>
 #include <boost/buffers/range.hpp>

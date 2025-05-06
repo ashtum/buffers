@@ -31,18 +31,18 @@ struct const_buffer_subspan_test
         // const_buffer_subspan()
         {
             const_buffer_subspan bs;
-            BOOST_TEST_EQ(buffer_size(bs), 0);
+            BOOST_TEST_EQ(size(bs), 0);
         }
 
         // const_buffer_subspan(
         //  const_buffer const*, std::size_t)
         {
             const_buffer_subspan s(cb, 3);
-            BOOST_TEST_EQ(buffer_size(s), 15);
+            BOOST_TEST_EQ(size(s), 15);
         }
         {
             const_buffer_subspan s(cb, 0);
-            BOOST_TEST_EQ(buffer_size(s), 0);
+            BOOST_TEST_EQ(size(s), 0);
         }
 
         // const_buffer_subspan(
@@ -51,15 +51,15 @@ struct const_buffer_subspan_test
             const_buffer_span cs0(cb, 3);
             const_buffer_subspan cs1(cs0);
             BOOST_TEST_EQ(
-                buffer_size(cs0),
-                buffer_size(cs1));
+                size(cs0),
+                size(cs1));
         }
         {
             const_buffer_span cs0(cb, 0);
             const_buffer_subspan cs1(cs0);
             BOOST_TEST_EQ(
-                buffer_size(cs0),
-                buffer_size(cs1));
+                size(cs0),
+                size(cs1));
         }
 
         // const_buffer_subspan(
@@ -68,17 +68,17 @@ struct const_buffer_subspan_test
             const_buffer_subspan s0(cb, 3);
             const_buffer_subspan s1(s0);
             BOOST_TEST_EQ(
-                buffer_size(s1),
-                buffer_size(s0));
+                size(s1),
+                size(s0));
         }
 
         // operator=(
         //  const_buffer_subspan const&)
         {
             const_buffer_subspan s;
-            BOOST_TEST_EQ(buffer_size(s), 0);
+            BOOST_TEST_EQ(size(s), 0);
             s = const_buffer_subspan(cb, 3);
-            BOOST_TEST_EQ(buffer_size(s), 15);
+            BOOST_TEST_EQ(size(s), 15);
         }
     }
 
