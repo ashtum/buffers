@@ -26,9 +26,9 @@ struct prefix_test
         {
             char buf[32];
             span<char> s(buf);
-            BOOST_TEST(prefix_(s, 0).size() == 0);
-            BOOST_TEST(prefix_(s, 1).size() == 1);
-            BOOST_TEST(prefix_(s, 99).size() == 32);
+            BOOST_TEST(prefix(s, 0).size() == 0);
+            BOOST_TEST(prefix(s, 1).size() == 1);
+            BOOST_TEST(prefix(s, 99).size() == 32);
         }
     }
 };

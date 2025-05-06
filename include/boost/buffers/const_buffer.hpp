@@ -87,16 +87,12 @@ public:
         return n_;
     }
 
-    friend
     const_buffer
-    tag_invoke(
-        prefix_tag const&,
-        const_buffer const& b,
-        std::size_t n) noexcept
+    prefix(std::size_t n) const noexcept
     {
-        if(n < b.size())
-            return { b.data(), n };
-        return b;
+        if(n < size())
+            return { data(), n };
+        return *this;
     }
 
     friend

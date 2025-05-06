@@ -18,6 +18,8 @@
 #include <boost/buffers/tag_invoke.hpp>
 #include <boost/buffers/type_traits.hpp>
 
+#include <boost/buffers/prefix.hpp>
+
 namespace boost {
 namespace buffers {
 
@@ -39,10 +41,7 @@ tag_invoke(
 */
 template<class BufferSequence>
 using prefix_type = decltype(
-    tag_invoke(
-        prefix_tag{},
-        std::declval<BufferSequence const&>(),
-        std::size_t{}));
+    std::declval<BufferSequence const&>().prefix(std::size_t{}));
 
 /** Returns the type of a suffix of a buffer sequence.
 */
@@ -83,10 +82,8 @@ struct sans_suffix_impl
     {
         auto const n0 = buffer_size(b);
         if(n < n0)
-            return tag_invoke(
-                prefix_tag{}, b, n0 - n);
-        return tag_invoke(
-            prefix_tag{}, b, 0);
+            return prefix(b, n0 - n);
+        return prefix(b, 0);
     }
 };
 
@@ -174,7 +171,9 @@ struct front_impl
 
 /** Return a prefix of the buffer sequence.
 */
+#if 0
 constexpr detail::prefix_impl prefix{};
+#endif
 
 /** Return a suffix of the buffer sequence.
 */

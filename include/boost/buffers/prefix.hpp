@@ -19,18 +19,15 @@ namespace buffers {
 
 /** Return the first n bytes of a buffer sequence
 */
-template<class BufferSequence>
-void
-prefix_(
-    BufferSequence const&,
-    std::size_t) = delete;
+template<class>
+void prefix(...) = delete;
 
 template<
     template<class, std::size_t> class Span,
     class T, std::size_t Extent>
 constexpr
 auto
-prefix_(
+prefix(
     Span<T, Extent> const& bs,
     std::size_t n) ->
         typename std::enable_if<
@@ -48,7 +45,7 @@ template<
     class = std::enable_if<
         detail::has_prefix<T>::value>::type>
 auto
-prefix_(
+prefix(
     T const& bs,
     std::size_t n) ->
         decltype(bs.prefix(n))

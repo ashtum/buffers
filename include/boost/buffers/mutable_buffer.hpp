@@ -94,56 +94,12 @@ public:
         return this + 1;
     }
 
-#if 0
-    /** Remove a prefix from the buffer.
-    */
-    mutable_buffer&
-    operator+=(std::size_t n) noexcept
+    mutable_buffer
+    prefix(std::size_t n) const noexcept
     {
-        if(n >= n_)
-        {
-            p_ = p_ + n_;
-            n_ = 0;
-            return *this;
-        }
-        p_ = p_ + n;
-        n_ -= n;
+        if(n < size())
+            return { data(), n };
         return *this;
-    }
-
-    /** Return the buffer with a prefix removed.
-    */
-    friend
-    mutable_buffer
-    operator+(
-        mutable_buffer b,
-        std::size_t n) noexcept
-    {
-        return b += n;
-    }
-
-    /** Return the buffer with a prefix removed.
-    */
-    friend
-    mutable_buffer
-    operator+(
-        std::size_t n,
-        mutable_buffer b) noexcept
-    {
-        return b += n;
-    }
-#endif
-
-    friend
-    mutable_buffer
-    tag_invoke(
-        prefix_tag const&,
-        mutable_buffer const& b,
-        std::size_t n) noexcept
-    {
-        if(n < b.size())
-            return { b.p_, n };
-        return b;
     }
 
     friend
