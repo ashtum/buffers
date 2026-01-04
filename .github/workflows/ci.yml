@@ -49,6 +49,7 @@ jobs:
         uses: cppalliance/aws-hosted-runners@v1.0.0
 
   build:
+    if: false
     needs: [ runner-selection ]
     defaults:
       run:
@@ -1147,8 +1148,8 @@ jobs:
         uses: actions/checkout@v3
         with:
           path: capy-root
-          repository: cppalliance/capy
-          ref: develop
+          repository: ashtum/capy
+          ref: pr/test-mrdocs
 
       - name: Clone Boost
         uses: alandefreitas/cpp-actions/boost-clone@v1.9.0
